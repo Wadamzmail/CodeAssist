@@ -6,7 +6,8 @@ apply plugin: 'kotlin-android'
 android {
     compileSdkVersion rootProject.ext.compileSdkVersion
     buildToolsVersion rootProject.ext.buildToolsVersion
-
+    namespace "com.tyron.viewbinding.task"
+    
     defaultConfig {
         minSdk 26
         targetSdk 31
