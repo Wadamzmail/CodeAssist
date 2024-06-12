@@ -83,19 +83,9 @@ class LockableMap<K, V> @Inject constructor(
 
     override fun computeIfAbsent(key: K, mappingFunction: Function<in K, out V>): V = check {
         delegate.computeIfAbsent(key, mappingFunction)
-    }
-
-    override fun computeIfPresent(key: K, remappingFunction: BiFunction<in K, in V, out V?>): V? =
-        check {
-            delegate.computeIfPresent(key, remappingFunction)
-        }
+    }    
 
     override fun compute(key: K, remappingFunction: BiFunction<in K, in V?, out V?>): V? = check {
         delegate.compute(key, remappingFunction)
     }
-
-    override fun merge(key: K, value: V, remappingFunction: BiFunction<in V, in V, out V?>): V? =
-        check {
-            delegate.merge(key, value, remappingFunction)
-        }
 }
