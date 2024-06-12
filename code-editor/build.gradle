@@ -5,7 +5,8 @@ plugins {
 android {
     compileSdkVersion rootProject.ext.compileSdkVersion
     buildToolsVersion rootProject.ext.buildToolsVersion
-
+    namespace "io.github.rosemoe.sora2"
+      
     defaultConfig {
         minSdk 26
         targetSdk 31
