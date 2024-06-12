@@ -210,7 +210,7 @@ abstract class ProcessTestManifest : ManifestProcessorTask() {
             logger.verbose("Generating in %1\$s", generatedTestManifest!!.absolutePath)
             if (handleProfiling != null) {
                 Preconditions.checkNotNull(
-                    functionalTest,
+                    functionalTest!!,
                     "functionalTest cannot be null."
                 )
                 generateInstrumentedTestManifest(
