@@ -4,7 +4,8 @@ plugins {
 
 android {
     compileSdk 32
-
+    namespace "com.tyron.terminalview"
+	
     defaultConfig {
         minSdk 21
         targetSdk 32
