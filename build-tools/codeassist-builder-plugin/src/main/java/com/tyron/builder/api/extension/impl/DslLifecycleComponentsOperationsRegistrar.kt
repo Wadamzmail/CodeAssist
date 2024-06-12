@@ -2,8 +2,8 @@ package com.tyron.builder.api.extension.impl
 
 import org.gradle.api.Action
 
-open class DslLifecycleComponentsOperationsRegistrar<T>(
-        private val extension: T,
+open class DslLifecycleComponentsOperationsRegistrar<T : Any>(
+    private val extension: T,
 ) {
     private val dslFinalizationOperations = mutableListOf<Action<T>>()
 
