@@ -442,29 +442,33 @@ class DslDecorator(supportedPropertyTypes: List<SupportedPropertyType>) {
     }
 
     private fun createFieldBackedSetters(
-        classWriter: ClassWriter,
-        generatedClass: Type,
-        property: ManagedProperty
-    ) {
-        when (property.supportedPropertyType) {
-            is SupportedPropertyType.Collection -> {
-                createGroovyMutatingSetter(classWriter, generatedClass, property)
-            }
-            is SupportedPropertyType.Var -> {
-                for (setter in property.settersToGenerate) {
-                    createFieldBackedSetter(
-                        classWriter,
-                        generatedClass,
-                        property,
-                        setter,
-                        disallowNullableValue = property.settersAnnotations.any {
-                            it.annotationClass == NonNullableSetter::class
-                        }
-                    )
-                }
+    classWriter: ClassWriter,
+    generatedClass: Type,
+    property: ManagedProperty
+) {
+    when (val propertyType = property.supportedPropertyType) {
+        is SupportedPropertyType.Collection -> {
+            createGroovyMutatingSetter(classWriter, generatedClass, property)
+        }
+        is SupportedPropertyType.Var -> {
+            for (setter in property.settersToGenerate) {
+                createFieldBackedSetter(
+                    classWriter,
+                    generatedClass,
+                    property,
+                    setter,
+                    disallowNullableValue = property.settersAnnotations.any {
+                        it.annotationClass == NonNullableSetter::class
+                    }
+                )
             }
         }
+        else -> {
+            throw IllegalArgumentException("Unsupported property type: ${propertyType::class}")
+        }
     }
+}
+
 
     private fun createFieldBackedSetter(
         classWriter: ClassWriter,
