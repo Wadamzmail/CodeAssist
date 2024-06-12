@@ -7,8 +7,9 @@ import java.io.PrintStream
 
 internal val MAGIC = byteArrayOf('p', 'r', 'o', '\u0000')
 
-class ArtProfile(
-    val profileData: Map<DexFile, DexFileData>,
+
+class ArtProfile internal constructor(
+    internal val profileData: Map<DexFile, DexFileData>,
     private val apkName: String = ""
 ) {
     fun print(os: PrintStream, obf: ObfuscationMap) {
@@ -42,7 +43,7 @@ class ArtProfile(
     }
 
     private fun extractKey(key: String): String {
-        val result = key.substringAfter('!').substringAfter(':')
+        val result =  key.substringAfter('!').substringAfter(':')
         assert(result.indexOf(':') == -1)
         assert(result.indexOf('!') == -1)
         return result
@@ -125,10 +126,10 @@ fun ArtProfile(hrp: HumanReadableProfile, obf: ObfuscationMap, apk: Apk): ArtPro
 }
 
 fun ArtProfile(
-    hrp: HumanReadableProfile,
-    obf: ObfuscationMap,
-    dexes: List<DexFile>,
-    apkName: String = ""
+        hrp: HumanReadableProfile,
+        obf: ObfuscationMap,
+        dexes: List<DexFile>,
+        apkName: String = ""
 ): ArtProfile {
     val profileData = HashMap<DexFile, DexFileData>()
     for (iDex in dexes.indices) {
@@ -161,9 +162,9 @@ fun ArtProfile(
 
         if (profileTypeIndexes.isNotEmpty() || profileMethods.isNotEmpty()) {
             profileData[dex] = DexFileData(
-                profileTypeIndexes,
-                profileClassIndexes,
-                profileMethods
+                    profileTypeIndexes,
+                    profileClassIndexes,
+                    profileMethods
             )
         }
     }
