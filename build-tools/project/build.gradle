@@ -11,7 +11,7 @@ java {
 tasks.withType(org.jetbrains.kotlin.gradle.tasks.KotlinCompile).all {
     kotlinOptions {
         jvmTarget = '11'
-        freeCompilerArgs += '-Xjvm-default=enable'
+        freeCompilerArgs += ['-Xjvm-default=all-compatibility']
     }
 }
 
