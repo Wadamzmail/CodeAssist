@@ -6,7 +6,8 @@ plugins {
 android {
     compileSdkVersion rootProject.ext.compileSdkVersion
     buildToolsVersion rootProject.ext.buildToolsVersion
-
+    namespace "com.tyron.completion.xml"
+	
     defaultConfig {
         minSdk 26
         targetSdk 31
@@ -71,6 +72,6 @@ dependencies {
 tasks.withType(org.jetbrains.kotlin.gradle.tasks.KotlinCompile).all {
     kotlinOptions {
         jvmTarget = '11'
-        freeCompilerArgs += '-Xjvm-default=enable'
+        //freeCompilerArgs += '-Xjvm-default=enable'
     }
 }
