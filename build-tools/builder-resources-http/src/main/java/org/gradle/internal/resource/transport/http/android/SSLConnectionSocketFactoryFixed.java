@@ -19,6 +19,9 @@ import javax.net.ssl.SSLSession;
 import javax.net.ssl.SSLSocket;
 import javax.net.ssl.SSLSocketFactory;
 
+import javax.net.ssl.SSLParameters;
+import javax.net.ssl.SNIHostName;
+
 import cz.msebera.android.httpclient.conn.ssl.SSLConnectionSocketFactory;
 import cz.msebera.android.httpclient.protocol.HttpContext;
 
@@ -92,12 +95,19 @@ public class SSLConnectionSocketFactoryFixed extends SSLConnectionSocketFactory 
 
         prepareSocket(sslsock);
 
-        try {
+      /*  try {
             Method method = sslsock.getClass().getMethod("setHostname", String.class);
             method.invoke(sslsock, target);
         } catch (Exception ex) {
             System.out.println("SNI configuration failed");
-        }
+        }*/
+        try {
+           SSLParameters sslParams = sslsock.getSSLParameters();
+           sslParams.setServerNames(Collections.singletonList(new SNIHostName(target)));
+           sslsock.setSSLParameters(sslParams);
+       } catch (Exception ex) {
+           System.out.println("SNI configuration failed");
+       } 
 
         sslsock.startHandshake();
         verifyHostname(sslsock, target);
