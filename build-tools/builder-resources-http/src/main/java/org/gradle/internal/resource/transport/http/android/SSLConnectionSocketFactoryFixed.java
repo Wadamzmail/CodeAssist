@@ -101,18 +101,18 @@ public class SSLConnectionSocketFactoryFixed extends SSLConnectionSocketFactory 
         } catch (Exception ex) {
             System.out.println("SNI configuration failed");
         }*/
-       /* try {
+        try {
            SSLParameters sslParams = sslsock.getSSLParameters();
            sslParams.setServerNames(Collections.singletonList(new SNIHostName(target)));
            sslsock.setSSLParameters(sslParams);
        } catch (Exception ex) {
            System.out.println("SNI configuration failed");
-       } */
-        try{
+       } 
+     /*   try{
         this.socketFactory.setHostname(sslsock, target);
         } catch (Exception ex) {
            System.out.println("SNI configuration failed");
-        } 
+        } */
 
         sslsock.startHandshake();
         verifyHostname(sslsock, target);
